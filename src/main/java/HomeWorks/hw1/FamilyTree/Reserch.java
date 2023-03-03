@@ -1,10 +1,15 @@
 package HomeWorks.hw1.FamilyTree;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 
+/**
+ * В этом классе есть смысл сменить типы возвращаемых результатов на ArrayList<Persons>
+ * в таком случае мы можем получать дополнительные данные из этого списка или вторично обрабатывать
+ * полученные значения
+ * ArrayList<String> в нашем случае сильно ограничивает повторное использование
+ * полученных данных, т.к. они уже не уникальны и не дают возможность использовать в рекурсивных отборах
+ * */
 public class Reserch {
     ArrayList<String> result = new ArrayList<>();
     ArrayList<Node> tree;
@@ -16,7 +21,8 @@ public class Reserch {
     /**
      * Получить родственников person с отношением rel
      *
-     * @return - список Person
+     * *@return - список Person
+     *
      */
     public ArrayList<String> spend(Person person, Relationship rel) {
         for (Node t : tree) {
@@ -28,41 +34,62 @@ public class Reserch {
     }
 
     /**
-     * Получить родителей person
+     * Получаем родителей родителей person
+     *
+     * @param person
+     * @return
+     */
+    public ArrayList<String> getParents(Person person) {
+        return spend(person, Relationship.children);
+    }
+
+    /**
+     * Получаем всех детей person
      *
      * @param person
      * @return
      */
     public ArrayList<String> getChildren(Person person) {
-        for (Node n: this.tree) {
-                if (n.getP1().equals(person) && n.getRe()==Relationship.children){
-                    result.add(n.getP2().getFullName());
-                }
-            }
-
-        return result;
+        return spend(person, Relationship.parent);
     }
 
-
-    /** Получить братьев и сестер
+    /**
+     * Получить братьев и сестер
+     *
      * @param person
      * @return
      */
-    public  void getBrotherSister(Person person){
-        ArrayList<Person> parents = new ArrayList<>();
-
-        for (Node parent: this.tree){//собираем список родителей
-            if (parent.getRe()==Relationship.parent && parent.getP2().equals(person) ){
-                parents.add(parent.getP1());// в parents получили список родителей
+    public ArrayList<String> getBrotherSister(Person person) {
+        ArrayList<Node> parents = new ArrayList<>();
+        for (Node parent : this.tree) {//собираем список родителей
+            if (parent.getRe() == Relationship.parent && parent.getP2().equals(person)) {
+                parents.add(parent);// в parents получили список родителей
             }
         }
         HashSet<Person> brother_sister = new HashSet<>();
-        for (Node t: this.tree) {
-            if (t.getP1().equals())
+        for (Node parent : parents) {// находим всех братьев и сестер
+            for (Node t : this.tree) {
+                if (parent.getP1().equals(t.getP1()) &&
+                        !t.getP2().equals(person)) {//кроме самого person
+                    brother_sister.add(t.getP2());
+                }
+            }
         }
+        for (Person p : brother_sister) {
+            result.add(p.getFullName());
         }
+        return result;
 
+    }
 
-
+    /**
+     * Получить партнеров по браку
+     *
+     * @param person
+     * @return
+     */
+    public ArrayList<String> getPartners(Person person) {
+        return spend(person, Relationship.partner);
+    }
 }
 

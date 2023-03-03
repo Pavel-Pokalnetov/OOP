@@ -5,5 +5,6 @@ package HomeWorks.hw1.FamilyTree;
  */
 public enum Relationship {
     parent,
-    children
+    children,
+    partner;
 }
