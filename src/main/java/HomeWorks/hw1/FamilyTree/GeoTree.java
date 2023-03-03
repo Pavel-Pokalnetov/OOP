@@ -10,8 +10,11 @@ public class GeoTree {
     }
 
     public void append(Person parent, Person children) {
-        tree.add(new Node(parent, Relationship.parent, children));
-        tree.add(new Node(children, Relationship.children, parent));
+        tree.add(new Node(parent, Relationship.parent, children)); //  parent родитель для children
+        tree.add(new Node(children, Relationship.children, parent)); // children ребенок для parent %(
     }
+
+
+
 
 }
