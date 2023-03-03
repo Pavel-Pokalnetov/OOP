@@ -24,8 +24,15 @@ public class Reserch {
         return result;
     }
 
+    /** Получить детей
+     * @param person
+     * @return
+     */
     public ArrayList<String> getChildren(Person person) {
         ArrayList<String> result = new ArrayList<>();
+
+
+
         return result;
     }
 
