@@ -1,6 +1,4 @@
-package HomeWorks.hw1.FamilyTree;
-
-import java.util.Calendar;
+package HomeWorks.hw1.task1;
 
 public class Person {
     private enum Sex {

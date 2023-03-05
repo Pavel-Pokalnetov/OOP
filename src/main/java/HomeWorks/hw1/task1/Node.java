@@ -1,4 +1,4 @@
-package HomeWorks.hw1.FamilyTree;
+package HomeWorks.hw1.task1;
 
 public class Node {
     private Person p1;//персона

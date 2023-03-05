@@ -1,4 +1,4 @@
-package HomeWorks.hw1.FamilyTree;
+package HomeWorks.hw1.task1;
 
 /**
  * Родственные отношения,  parent - родитель,  children - ребенок

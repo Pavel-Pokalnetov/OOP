@@ -1,6 +1,4 @@
-package HomeWorks.hw1.FamilyTree;
-
-import static HomeWorks.hw1.FamilyTree.View.*;
+package HomeWorks.hw1.task1;
 
 public class Main {
     public static void main(String[] args) {
