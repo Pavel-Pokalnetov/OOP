@@ -1,24 +1,30 @@
 package HomeWorks.hw1.FamilyTree;
 
 public class View {
-    public static void viewBrotherSister(Person person, GeoTree gt) {
+    GeoTree gTree;
+
+    public View(GeoTree geoTree) {
+        this.gTree = geoTree;
+    }
+
+    public void viewBrotherSister(Person person) {
         System.out.printf("%s | братья/сёстры --> ", person.getFullName());
-        System.out.println(new Reserch(gt).getBrotherSister(person));
+        System.out.println(new Reserch(this.gTree).getBrotherSister(person));
     }
 
-    public static void viewParent(Person person, GeoTree gt) {
+    public void viewParent(Person person) {
         System.out.printf("%s | родители --> ", person.getFullName());
-        System.out.println(new Reserch(gt).getParents(person));
+        System.out.println(new Reserch(this.gTree).getParents(person));
     }
 
-    public static void viewChildren(Person person, GeoTree gt) {
+    public void viewChildren(Person person) {
         System.out.printf("%s | дети --> ", person.getFullName());
-        System.out.println(new Reserch(gt).getChildren(person));
+        System.out.println(new Reserch(this.gTree).getChildren(person));
     }
 
-    public static void viewPartners(Person person, GeoTree gt) {
+    public void viewPartners(Person person) {
         System.out.printf("%s | брак --> ", person.getFullName());
-        System.out.println(new Reserch(gt).getPartners(person));
+        System.out.println(new Reserch(this.gTree).getPartners(person));
     }
 
 }

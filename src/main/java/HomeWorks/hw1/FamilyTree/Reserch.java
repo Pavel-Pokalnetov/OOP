@@ -64,12 +64,14 @@ public class Reserch {
         for (Node parent : this.tree) {//собираем список родителей
             if (parent.getRe() == Relationship.parent && parent.getP2().equals(person)) {
                 parents.add(parent);// в parents получили список родителей
+                if (parents.size()>1)break;
             }
         }
         HashSet<Person> brother_sister = new HashSet<>();
         for (Node parent : parents) {// находим всех братьев и сестер
             for (Node t : this.tree) {
                 if (parent.getP1().equals(t.getP1()) &&
+                        t.getRe()==Relationship.parent && //если отношение -> родитель
                         !t.getP2().equals(person)) {//кроме самого person
                     brother_sister.add(t.getP2());
                 }

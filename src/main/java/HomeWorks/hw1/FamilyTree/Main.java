@@ -29,10 +29,12 @@ public class Main {
         gt.append(ivan,jura);
 
 
-        viewParent(vasya,gt);
-        viewBrotherSister(vasya,gt);
-        viewPartners(vasya,gt);
-        viewChildren(vasya,gt);
+        new View(gt).viewParent(vasya);
+        new View(gt).viewBrotherSister(vasya);
+        new View(gt).viewPartners(vasya);
+        new View(gt).viewChildren(vasya);
+        new View(gt).viewBrotherSister(ivan);
+
     }
 
 }
