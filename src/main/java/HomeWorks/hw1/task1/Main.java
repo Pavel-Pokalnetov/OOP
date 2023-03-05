@@ -2,6 +2,7 @@ package HomeWorks.hw1.task1;
 
 public class Main {
     public static void main(String[] args) {
+
         Person irina = new Person("Ирина");
         Person vasya = new Person("Вася");
         Person masha = new Person("Маша");
@@ -13,25 +14,25 @@ public class Main {
         Person jura = new Person("Юра");
 
         GeoTree gt = new GeoTree();
-        gt.append(irina, vasya);
-        gt.append(irina, masha);
+        gt.addParent(irina, vasya);
+        gt.addParent(irina, masha);
 
-        gt.append(vasya, jane);
-        gt.append(vasya, ivan);
-        gt.append(vasya, anton);
-        gt.append(elena, anton);
+        gt.addParent(vasya, jane);
+        gt.addParent(vasya, ivan);
+        gt.addParent(vasya, anton);
+        gt.addParent(elena, anton);
         gt.addPartner(vasya,elena);
-        gt.append(elena, jane);
-        gt.append(elena, ivan);
-        gt.append(ivan,gala);
-        gt.append(ivan,jura);
-
+        gt.addParent(elena, jane);
+        gt.addParent(elena, ivan);
+        gt.addParent(ivan,gala);
+        gt.addParent(ivan,jura);
 
         new View(gt).viewParent(vasya);
         new View(gt).viewBrotherSister(vasya);
         new View(gt).viewPartners(vasya);
         new View(gt).viewChildren(vasya);
         new View(gt).viewBrotherSister(ivan);
+        new View(gt).viewParent(ivan);
 
     }
 

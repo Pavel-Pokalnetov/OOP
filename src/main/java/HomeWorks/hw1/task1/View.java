@@ -1,6 +1,9 @@
 package HomeWorks.hw1.task1;
 
-public class View {
+/**
+ * класс для визуализации данных в консоли
+ */
+class View {
     GeoTree gTree;
 
     public View(GeoTree geoTree) {
