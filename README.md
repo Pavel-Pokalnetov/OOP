@@ -11,7 +11,7 @@
 * дополнительные компоненты, например отвечающие за вывод данных в консоль, загрузку и сохранения в файл, получение\построение отдельных моделей человека 
 Под “проведением исследования” можно понимать получение всех детей выбранного человека.
 
-Решение: https://github.com/Pavel-Pokalnetov/OOP/tree/hw1/src/main/java/HomeWorks/hw1/FamilyTree
+Решение: https://github.com/Pavel-Pokalnetov/OOP/tree/hw1/src/main/java/HomeWorks/hw1/task1
 
 
 ### Задача 2. 
