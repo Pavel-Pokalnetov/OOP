@@ -37,29 +37,36 @@ public class Human {
     /** Положить предмет в шкаф
      * @param obj - шкаф
      * @param item - предмет
+     * @param index - номер полки
      */
-    public void setItemInWardrobe(Wardrobe obj,Item item) {
-        if (obj.setItem(item)) {
-            System.out.println("Удалось положить предмет "+ item.getName());
+    public void setItemInWardrobe(Wardrobe obj,Item item,int index) {
+        if (obj.setItem(item,index)) {
+            System.out.println("Положили предмет "+ item.getName() + " на полку "+index+ " в " + obj.description);
         } else {
-            System.out.println("Не удалось положить предмет "+item.getName());
+            System.out.println("Не удалось положить предмет "+item.getName() + " на полку "+index+" в " + obj.description);
         }
     }
 
     /**
-     * @param obj - шкаф
+     * @param obj   - шкаф
      * @param index - номер места в шкафу
-     * @param item - предмет
+     * @param item  - предмет
      */
     public Item getItemInWardrobe(Wardrobe obj, int index){
-        Item temp = obj.getItem(index);
-        if (temp==null){
+        Item tempItem = obj.getItem(index);
+        if (tempItem==null){
             System.out.println("Предметов нет");
         }else{
-            System.out.println("Получили предмет "+ temp.getName());
-            return temp;
+            System.out.println("Получили предмет "+ tempItem.getName());
         }
-        return null;
+        return tempItem;
+    }
+
+    /**
+     * Посмотреть в шкаф
+     */
+    public void viewInWardrobe(Wardrobe obj){
+        obj.viewItems();
     }
 
     public void feed_to_cat(Cat cat, Integer meal){//кормим кошку

@@ -3,7 +3,7 @@ package HomeWorks.hw1.task2_3;
 import java.util.Random;
 
 public class Cat extends Item {
-    enum Stage {
+    private enum Stage {
         sleep,//спит
         fun, //веселится(играет)
         angry, //злится
@@ -11,15 +11,29 @@ public class Cat extends Item {
         walks
     }
 
-    Sex sex;
-    int age;
-    int safety; //сытость 0-100%
-    int mood;
-    Stage stage;
+    private Sex sex;
+    private int age;
+    private int safety; //сытость 0-100%
+    private int mood;
+    private Stage stage;
+
+    /**
+     * @param name - кличка
+     * @param sex  - пол
+     * @param age  - возраст
+     */
+    public Cat(String name, Sex sex, int age) {
+        super(name);
+        this.sex = sex;
+        this.age = age;
+        this.safety = 70; //начальная сытость
+        this.mood = 80; //начальное настроение
+        this.stage = Stage.sleep;
+    }
 
     /**
      * обмен веществ
-     * уменьшение сытости
+     * уменьшение сытости и изменение настроения
      */
     public void metabolizm() {
         this.mood = Math.min(this.mood, 100);
@@ -37,39 +51,30 @@ public class Cat extends Item {
         }
         if (this.safety <= 0) {
             this.safety = 0;
-            System.out.println("м... я.... у.....");
+            speak("м... я.... у.....");
         }
 
     }
 
     /**
-     * @param name - кличка
-     * @param sex  - пол
-     * @param age  - возраст
+     * принять ласку
      */
-    public Cat(String name, Sex sex, int age) {
-        super(name);
-        this.sex = sex;
-        this.age = age;
-        this.safety = 50; //начальная сытость
-        this.mood = 60; //начальное настроение
-        this.stage = Stage.sleep;
-    }
-
-    public void accessCaress() { //принять ласку
+    public void accessCaress() {
         if (this.stage == Stage.angry) {
-            this.mood = 0;
+            this.mood -= 20;
             System.out.println("Кошка разозлилась и вас оцарапала!");
         }
-        if (this.safety > 50) {
+        if (this.safety > 40) {
             this.stage = Stage.fun;
             speak("Мур-Мур-Мур");
+            this.mood+=40;
         } else {
             this.stage = Stage.angry;
             speak("Кошка злится! ШШШШШШШ!!!! Ррррр!");
-            this.mood *= 0.5;
+            this.mood *= 0.7;
         }
         this.metabolizm();
+        viewParamCat();
     }
 
     public void speak() {
@@ -87,14 +92,17 @@ public class Cat extends Item {
             this.safety = 100;
             this.stage = Stage.fun;
             this.mood = 100;
-            speak("Мурррр!!!!");
         } else {
-            this.mood *= 1 + (meal / this.safety);
+            this.safety *= 1 + (meal / this.safety);
+            this.mood+=70*(meal/this.safety);
             this.mood = Math.min(this.mood, 100);
-        }
-        this.metabolizm();
+        }speak("Мурррр!!!!");
+        viewParamCat();
     }
 
+    /**
+     * Ответ на зов
+     */
     public void reply() {
         if (this.stage == Stage.angry) {
             return;//злая кошка не отзывается
@@ -103,8 +111,11 @@ public class Cat extends Item {
         }
         speak();
         this.metabolizm();
+        viewParamCat();
     }
 
-    ;
+    public void viewParamCat() {
+        System.out.printf("%s --> сытость[%d] настроение[%d] состояние[%s]\n", this.getName(), this.safety, this.mood, this.stage);
+    }
 
 }
