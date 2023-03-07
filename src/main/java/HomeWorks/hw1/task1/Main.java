@@ -21,11 +21,12 @@ public class Main {
         gt.addParent(vasya, ivan);
         gt.addParent(vasya, anton);
         gt.addParent(elena, anton);
-        gt.addPartner(vasya,elena);
+        gt.addPartner(vasya, elena);
         gt.addParent(elena, jane);
         gt.addParent(elena, ivan);
-        gt.addParent(ivan,gala);
-        gt.addParent(ivan,jura);
+        gt.addParent(ivan, gala);
+        gt.addParent(ivan, jura);
+        gt.addParent(ivan, jura);
 
         new View(gt).viewParent(vasya);
         new View(gt).viewBrotherSister(vasya);
@@ -33,6 +34,10 @@ public class Main {
         new View(gt).viewChildren(vasya);
         new View(gt).viewBrotherSister(ivan);
         new View(gt).viewParent(ivan);
+
+        for (Node t : gt.getTree()) {
+            System.out.printf("%s %s %s %d\n",t.getP1().getFullName(),t.getRe(),t.getP2().getFullName(),t.hashCode());
+        }
 
     }
 

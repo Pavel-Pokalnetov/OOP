@@ -25,4 +25,13 @@ class Node {
     public void setP2(Person person) {
         this.p2=person;
     }
+
+    @Override
+    public int hashCode(){
+       StringBuilder hash = new StringBuilder();
+       hash.append(this.p1.getFullName().hashCode());
+       hash.append(this.p2.getFullName().hashCode());
+       hash.append(this.re.hashCode());
+       return hash.hashCode();
+    }
 }

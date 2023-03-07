@@ -1,6 +1,7 @@
 package HomeWorks.hw1.task1;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Класс дерева узлов Node
@@ -17,9 +18,9 @@ import java.util.ArrayList;
  * а для partner-partner связи одинаковые...
  */
 class GeoTree {
-    private final ArrayList<Node> tree = new ArrayList<>();
+    private final HashSet<Node> tree = new HashSet<>();
 
-    public ArrayList<Node> getTree() {
+    public HashSet<Node> getTree() {
         return tree;
     }
 
@@ -35,6 +36,7 @@ class GeoTree {
         }
         tree.add(new Node(parent, Relationship.parent, children)); //  parent родитель для children
         tree.add(new Node(children, Relationship.children, parent)); // children ребенок для parent %(
+
     }
 
     /**

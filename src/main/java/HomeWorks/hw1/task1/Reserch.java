@@ -12,7 +12,7 @@ import java.util.HashSet;
  */
 public class Reserch {
     ArrayList<String> result = new ArrayList<>();
-    ArrayList<Node> tree;
+    HashSet<Node> tree;
 
     public Reserch(GeoTree geoTree) {
         tree = geoTree.getTree();
