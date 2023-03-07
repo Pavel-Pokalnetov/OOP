@@ -6,10 +6,6 @@ import java.util.HashSet;
 /**
  * Класс дерева узлов Node
  * Здесь нужно ввести проверку на null для person
- * к тому же есть недочеты с хранением данных: у нас нет никакой защиты от дублирования Node,
- * а они должны быть уникальны, для такого случая можно использовать вместо ArrayList<Node> коллекцию HashSet<Node>
- * тогда мы автоматически исключим дубликацию данных
- * <p>
  * Так же нужны методы для удаления связей Node, например при редактировании.
  * <p>
  * Еще мысль сделать один общий метод для добавления связей между "человеками",
@@ -50,32 +46,6 @@ class GeoTree {
         tree.add(new Node(partner1,Relationship.partner,partner2));
         tree.add(new Node(partner2,Relationship.partner,partner1));
 
-    }
-//      Возможно понадобится метод добавления персоны без связи с другими...
-//    public void addPersonOne(Person person){
-//        tree.add(new Node(person,null,null));
-//    }
-
-
-    /**
-     * Замена потомка (для редактирования)
-     *
-     * @param person      - редактируемый перс
-     * @param newChildren - новый потомок
-     * @param oldChildren - заменяемый потомок
-     * @return - результат выполнения boolean
-     */
-    public boolean replaceChildren(Person person, Person newChildren, Person oldChildren) {
-        if (checkPerson(person, newChildren)) return false;
-        for (Node t : tree) {
-            if (t.getP1().equals(person) &&
-                    Relationship.children == t.getRe() &&
-                    t.getP2().equals(oldChildren)) {
-                t.setP2(newChildren);
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

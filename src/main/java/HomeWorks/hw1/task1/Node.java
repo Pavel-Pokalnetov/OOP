@@ -22,10 +22,10 @@ class Node {
         return String.format("<%s(%s)-> %s>", p1, re, p2);
     }
 
-    public void setP2(Person person) {
-        this.p2=person;
-    }
-
+    /**
+     * переопределение HashCode для унакальности от p1.name,p2.name и pe
+     * так мы можеи проверять ноды на уникальность по этим трем полям
+     */
     @Override
     public int hashCode(){
        StringBuilder hash = new StringBuilder();
