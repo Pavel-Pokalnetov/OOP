@@ -24,6 +24,7 @@ public class Cat extends BaseCreature {
      * обмен веществ
      * уменьшение сытости и изменение настроения
      */
+    @Override
     public void metabolizm() {
         this.mood = Math.min(this.mood, 100);
         if (this.mood > 50) {

@@ -16,4 +16,7 @@ public abstract class BaseCreature implements CreatureAction {
         return name;
     }
 
+    void metabolizm() {
+    }
+
 }

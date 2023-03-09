@@ -92,7 +92,7 @@ public class Human extends BaseCreature implements CreatureAction {
 
 
     public void metabolizm() {
-
+        speak("Я живу!");
     }
 
     @Override
@@ -102,6 +102,6 @@ public class Human extends BaseCreature implements CreatureAction {
 
     @Override
     public void reply() {
-
+        speak("Я здесь!");
     }
 }
