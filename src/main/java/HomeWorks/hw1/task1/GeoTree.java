@@ -104,8 +104,8 @@ class GeoTree implements Reserch, Loaded<HashSet<Node>>, Saved<HashSet<Node>> {
     public ArrayList<String> getPartners(Person person) {
         return spend(person, Relationship.partner);
     }
-
-    private ArrayList<String> spend(Person person, Relationship rel) {
+    @Override
+    public ArrayList<String> spend(Person person, Relationship rel) {
         ArrayList<String> result = new ArrayList<>();
         for (Node t : tree) {
             if (t.getP1().getFullName().equals(person.getFullName()) && t.getRe() == rel) {

@@ -2,20 +2,9 @@ package HomeWorks.hw1.task2_3;
 
 import java.util.Random;
 
-public class Cat extends Item {
-    private enum Stage {
-        sleep,//спит
-        fun, //веселится(играет)
-        angry, //злится
-        hungry,//голодная
-        walks
-    }
+public class Cat extends BaseCreature {
 
-    private Sex sex;
-    private int age;
-    private int safety; //сытость 0-100%
-    private int mood;
-    private Stage stage;
+
 
     /**
      * @param name - кличка
@@ -23,7 +12,7 @@ public class Cat extends Item {
      * @param age  - возраст
      */
     public Cat(String name, Sex sex, int age) {
-        super(name);
+        this.name = name;
         this.sex = sex;
         this.age = age;
         this.safety = 70; //начальная сытость
@@ -57,9 +46,9 @@ public class Cat extends Item {
     }
 
     /**
-     * принять ласку
+     * Реакция на ласку
      */
-    public void accessCaress() {
+    public void reaction() {
         if (this.stage == Stage.angry) {
             this.mood -= 20;
             System.out.println("Кошка разозлилась и вас оцарапала!");
@@ -67,7 +56,7 @@ public class Cat extends Item {
         if (this.safety > 40) {
             this.stage = Stage.fun;
             speak("Мур-Мур-Мур");
-            this.mood+=40;
+            this.mood += 40;
         } else {
             this.stage = Stage.angry;
             speak("Кошка злится! ШШШШШШШ!!!! Ррррр!");
@@ -77,15 +66,19 @@ public class Cat extends Item {
         viewParamCat();
     }
 
+    /**
+     * Голос
+     */
+    @Override
     public void speak() {
-        System.out.println("Мяу!");
+        this.speak("Мяу!");
     }
 
     public void speak(String voice) {
         System.out.println(voice);
     }
 
-
+    @Override
     public void eat(Integer meal) {
         this.safety += meal;
         if (this.safety > 100) {
@@ -94,15 +87,17 @@ public class Cat extends Item {
             this.mood = 100;
         } else {
             this.safety *= 1 + (meal / this.safety);
-            this.mood+=70*(meal/this.safety);
+            this.mood += 70 * (meal / this.safety);
             this.mood = Math.min(this.mood, 100);
-        }speak("Мурррр!!!!");
+        }
+        speak("Мурррр!!!!");
         viewParamCat();
     }
 
     /**
      * Ответ на зов
      */
+    @Override
     public void reply() {
         if (this.stage == Stage.angry) {
             return;//злая кошка не отзывается
@@ -115,7 +110,7 @@ public class Cat extends Item {
     }
 
     public void viewParamCat() {
-        System.out.printf("%s --> сытость[%d] настроение[%d] состояние[%s]\n", this.getName(), this.safety, this.mood, this.stage);
+        System.out.printf("%s --> сытость[%d] настроение[%d] состояние[%s]\n", this.name, this.safety, this.mood, this.stage);
     }
 
 }

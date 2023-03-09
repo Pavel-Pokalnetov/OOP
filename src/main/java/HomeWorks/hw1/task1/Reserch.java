@@ -7,4 +7,5 @@ public interface Reserch {
     ArrayList<String> getChildren(Person person);
     ArrayList<String> getBrotherSister(Person person);
     ArrayList<String> getPartners(Person person);
+    ArrayList<String> spend(Person person, Relationship rel);
 }
