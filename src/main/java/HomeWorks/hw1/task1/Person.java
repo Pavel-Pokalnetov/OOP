@@ -1,13 +1,8 @@
 package HomeWorks.hw1.task1;
 
 public class Person {
-    private enum Sex {
-        man, woman, none
-    }
-
     private String fullName;
     private Sex sex;
-
 
     public Person(String fullName) {
         this(fullName, Sex.none);

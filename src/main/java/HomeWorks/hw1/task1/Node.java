@@ -19,7 +19,7 @@ class Node {
 
     @Override
     public String toString() {
-        return String.format("<%s(%s)-> %s>", p1, re, p2);
+        return String.format("%s,%s,%s", p1.getFullName(), re, p2.getFullName());
     }
 
     /**
