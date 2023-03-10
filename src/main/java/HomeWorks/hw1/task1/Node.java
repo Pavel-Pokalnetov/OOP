@@ -19,10 +19,19 @@ class Node {
 
     @Override
     public String toString() {
-        return String.format("<%s(%s)-> %s>", p1, re, p2);
+        return String.format("%s,%s,%s", p1.getFullName(), re, p2.getFullName());
     }
 
-    public void setP2(Person person) {
-        this.p2=person;
+    /**
+     * переопределение HashCode для унакальности от p1.name,p2.name и pe
+     * так мы можеи проверять ноды на уникальность по этим трем полям
+     */
+    @Override
+    public int hashCode(){
+       StringBuilder hash = new StringBuilder();
+       hash.append(this.p1.getFullName().hashCode());
+       hash.append(this.p2.getFullName().hashCode());
+       hash.append(this.re.hashCode());
+       return hash.hashCode();
     }
 }
