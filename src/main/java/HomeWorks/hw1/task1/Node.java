@@ -1,5 +1,7 @@
 package HomeWorks.hw1.task1;
 
+import java.util.Objects;
+
 class Node {
     private Person p1;//персона
     private Relationship re; //родственное отношение
@@ -12,10 +14,17 @@ class Node {
         this.p2 = relative;
     }
 
-    //геттеры
-    public Person getP1() {return p1;}
-    public Person getP2() {return p2;}
-    public Relationship getRe() {return re;}
+    public Person getP1() {
+        return p1;
+    }
+
+    public Person getP2() {
+        return p2;
+    }
+
+    public Relationship getRe() {
+        return re;
+    }
 
     @Override
     public String toString() {
@@ -23,15 +32,26 @@ class Node {
     }
 
     /**
-     * переопределение HashCode для унакальности от p1.name,p2.name и pe
-     * так мы можеи проверять ноды на уникальность по этим трем полям
+     * переопределение метода сравнения
      */
     @Override
-    public int hashCode(){
-       StringBuilder hash = new StringBuilder();
-       hash.append(this.p1.getFullName().hashCode());
-       hash.append(this.p2.getFullName().hashCode());
-       hash.append(this.re.hashCode());
-       return hash.hashCode();
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Node node = (Node) o;
+        return getP1().equals(node.getP1()) &&
+                getRe() == node.getRe() &&
+                getP2().equals(node.getP2());
     }
+
+    /**
+     * переопределение HashCode для уникальности от p1.name,p2.name и pe
+     * так мы можем проверять ноды на уникальность по этим трем полям
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(getP1(), getRe(), getP2());
+    }
+
+
 }

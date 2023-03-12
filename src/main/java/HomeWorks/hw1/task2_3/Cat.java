@@ -5,16 +5,13 @@ import java.util.Random;
 public class Cat extends BaseCreature {
 
 
-
     /**
      * @param name - кличка
      * @param sex  - пол
      * @param age  - возраст
      */
     public Cat(String name, Sex sex, int age) {
-        this.name = name;
-        this.sex = sex;
-        this.age = age;
+        super(name, sex, age);
         this.safety = 70; //начальная сытость
         this.mood = 80; //начальное настроение
         this.stage = Stage.sleep;
@@ -25,7 +22,7 @@ public class Cat extends BaseCreature {
      * уменьшение сытости и изменение настроения
      */
     @Override
-    public void metabolizm() {
+    public void metabolism() {
         this.mood = Math.min(this.mood, 100);
         if (this.mood > 50) {
             if (new Random().nextBoolean()) {
@@ -63,7 +60,7 @@ public class Cat extends BaseCreature {
             speak("Кошка злится! ШШШШШШШ!!!! Ррррр!");
             this.mood *= 0.7;
         }
-        this.metabolizm();
+        this.metabolism();
         viewParamCat();
     }
 
@@ -106,7 +103,7 @@ public class Cat extends BaseCreature {
             this.stage = Stage.walks;
         }
         speak();
-        this.metabolizm();
+        this.metabolism();
         viewParamCat();
     }
 
