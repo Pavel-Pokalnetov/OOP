@@ -3,9 +3,7 @@ package HomeWorks.hw1.task2_3;
 public class Human extends BaseCreature implements CreatureAction {
 
     public Human(String name, Sex sex, int age) {
-        this.name = name;
-        this.age = age;
-        this.sex = sex;
+        super(name, sex, age);
     }
 
     /**
@@ -68,12 +66,15 @@ public class Human extends BaseCreature implements CreatureAction {
         System.out.println("Кошка поела");
     }
 
-    public void pet_a_cat(BaseCreature cat) {//ласкаем кошку
-        cat.reaction(); //кошка принимает ласки
+    public void pet(BaseCreature obj) {//ласкаем кошку
+        System.out.println(this.name + " зовет " + obj.getName());
+        obj.reaction(); //животное принимает ласки
     }
 
-    public void call_cat(BaseCreature cat) {//позвать кошку
-        cat.reply();//кошка должна ответить
+    public void call(BaseCreature obj) {//позвать кошку
+
+        System.out.println(this.name + " зовет " + obj.getName());
+        obj.reply();//животное отвечает
     }
 
     @Override
@@ -91,7 +92,7 @@ public class Human extends BaseCreature implements CreatureAction {
     }
 
 
-    public void metabolizm() {
+    public void metabolism() {
         speak("Я живу!");
     }
 
