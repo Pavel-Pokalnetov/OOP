@@ -43,4 +43,12 @@ public abstract class BaseCreature implements CreatureAction {
         return this.hashCode() == ((BaseCreature) o).hashCode();
     }
 
+    /**
+     * @param obg
+     */
+    @Override
+    public void call(BaseCreature obg) {
+        System.out.println(this.name + " зовет " + obg.getName());
+        obg.reply();
+    }
 }

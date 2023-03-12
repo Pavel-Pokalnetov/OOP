@@ -16,18 +16,18 @@ public class Dog extends BaseCreature {
 
     @Override
     public void eat(Integer meal) {
-        System.out.println("Собака поела " + meal + " еды!");
+        System.out.println(name +" поел(а) " + meal + " еды!");
     }
 
     @Override
     public void reaction() {
-        System.out.println("Собака виляет хвостом.");
+        System.out.println(name + " виляет хвостом.");
         speak();
     }
 
     @Override
     public void reply() {
-        System.out.println("Собака подходит.");
+        System.out.println(name +" подходит.");
         speak();
     }
 

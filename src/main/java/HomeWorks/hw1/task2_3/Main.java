@@ -12,12 +12,19 @@ public class Main {
 
     private static void demo2() {
         // работа equals()
-        BaseCreature kitty = new Cat("Матроскин", Sex.woman, 1);
+        BaseCreature cat = new Cat("Матроскин", Sex.woman, 1);
         BaseCreature dog = new Dog("Шарик", Sex.man, 5);
         Human man = new Human("дядя Фёдор", Sex.man, 6);
+        Bird galchenok = new Bird("Галчонок",Sex.man,1);
 
-        man.call(kitty);
+        man.call(cat);
         man.call(dog);
+        cat.call(dog);
+        dog.call(man);
+        man.feed_to(cat,10);
+        man.feed_to(dog,10);
+        cat.call(galchenok);
+        galchenok.call(cat);
     }
 
     private static void demo1() {
@@ -33,7 +40,7 @@ public class Main {
         stepDelimiter();
         man.call(cat);//позвать кошку
         stepDelimiter();
-        man.feed_to_cat(cat, 10);//покормить кошку
+        man.feed_to(cat, 10);//покормить кошку
         stepDelimiter();
         man.pet(cat);//приласкать кошку
         stepDelimiter();

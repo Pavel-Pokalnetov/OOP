@@ -61,9 +61,10 @@ public class Human extends BaseCreature implements CreatureAction {
         obj.viewItems();
     }
 
-    public void feed_to_cat(BaseCreature cat, Integer meal) {//кормим кошку
-        cat.eat(meal);//кошка есть
-        System.out.println("Кошка поела");
+    public void feed_to(BaseCreature obj, Integer meal) {//кормим животное
+        System.out.println(name+" кормит "+obj.getName()+"(а)");
+        obj.eat(meal);
+        System.out.println(obj.getName()+" поел(а)");
     }
 
     public void pet(BaseCreature obj) {//ласкаем кошку

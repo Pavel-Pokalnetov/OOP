@@ -61,7 +61,7 @@ public class Cat extends BaseCreature {
             this.mood *= 0.7;
         }
         this.metabolism();
-        viewParamCat();
+//        viewParamCat();
     }
 
     /**
@@ -89,7 +89,7 @@ public class Cat extends BaseCreature {
             this.mood = Math.min(this.mood, 100);
         }
         speak("Мурррр!!!!");
-        viewParamCat();
+//        viewParamCat();
     }
 
     /**
@@ -104,7 +104,7 @@ public class Cat extends BaseCreature {
         }
         speak();
         this.metabolism();
-        viewParamCat();
+//        viewParamCat();
     }
 
     public void viewParamCat() {
