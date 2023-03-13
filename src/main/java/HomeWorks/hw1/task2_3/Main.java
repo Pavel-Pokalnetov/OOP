@@ -8,13 +8,13 @@ public class Main {
     public static int i = 1;
 
     public static void main(String[] args) {
-        stepDelimiter("Кошка, человеку и шкаф.");
+        stepDelimiter("Кошка, человек и шкаф.");
         demo1();
 
         stepDelimiter("Дядя Фёдор, пес и кот.");
         demo2();
 
-        stepDelimiter("Компараторы");
+        stepDelimiter("Компараторы  и сортировка");
 
         ArrayList<BaseCreature> animals = new ArrayList<>();
         animals.add(new Cat("Мурка",Sex.woman,1));
@@ -24,7 +24,7 @@ public class Main {
         animals.add(new Cat("Васька",Sex.man,5));
         animals.add(new Cat("Бася",Sex.man,2));
         System.out.println("базовый список: "+animals);
-        Collections.sort(animals,new FromNameComparator());
+        animals.sort(new FromNameComparator());
         System.out.println("Сортировка по имени: "+animals);
         Collections.sort(animals);
         System.out.println("Сортировка по возрасту: "+animals);
