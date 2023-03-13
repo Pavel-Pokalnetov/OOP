@@ -8,11 +8,11 @@ public class Main {
     public static int i = 1;
 
     public static void main(String[] args) {
-//        stepDelimiter("Кошка, человеку и шкаф.");
-//        demo1();
-//
-//        stepDelimiter("Дядя Фёдор, пес и кот.");
-//        demo2();
+        stepDelimiter("Кошка, человеку и шкаф.");
+        demo1();
+
+        stepDelimiter("Дядя Фёдор, пес и кот.");
+        demo2();
 
         stepDelimiter("Компараторы");
 
