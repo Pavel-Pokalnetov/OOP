@@ -1,0 +1,25 @@
+package HomeWorks.hw4;
+
+import HomeWorks.hw1.task2_3.CreatureAction;
+
+import java.util.Comparator;
+
+public class SortByPriority implements Comparator<Task> {
+
+    public SortByPriority(int i) {
+        super();
+
+    }
+
+    @Override
+    public int compare(Task o1, Task o2) {
+        if (o1.getPriority()==o2.getPriority())return 0;
+        if (o1.getPriority().ordinal()>o2.getPriority().ordinal())return 1;
+        return -1;
+    }
+
+    @Override
+    public Comparator<Task> reversed() {
+        return Comparator.super.reversed();
+    }
+}
