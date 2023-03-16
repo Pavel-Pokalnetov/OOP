@@ -5,4 +5,8 @@ package HomeWorks.hw1.task2_3;
  */
 abstract class BaseItem {
     String description;
+
+    public String getDescription() {
+        return description;
+    }
 }

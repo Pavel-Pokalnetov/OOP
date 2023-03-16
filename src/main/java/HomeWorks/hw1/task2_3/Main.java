@@ -5,6 +5,29 @@ public class Main {
 
     public static void main(String[] args) {
 
+        demo1();
+        stepDelimiter();
+        demo2();
+    }
+
+    private static void demo2() {
+        // работа equals()
+        BaseCreature cat = new Cat("Матроскин", Sex.woman, 1);
+        BaseCreature dog = new Dog("Шарик", Sex.man, 5);
+        Human man = new Human("дядя Фёдор", Sex.man, 6);
+        Bird galchenok = new Bird("Галчонок",Sex.man,1);
+
+        man.call(cat);
+        man.call(dog);
+        cat.call(dog);
+        dog.call(man);
+        man.feed_to(cat,10);
+        man.feed_to(dog,10);
+        cat.call(galchenok);
+        galchenok.call(cat);
+    }
+
+    private static void demo1() {
         Human man = new Human("Олег", Sex.man, 25);
         BaseCreature cat = new Cat("Мурка", Sex.woman, 2);
         Item item1 = new Item("Чашка");
@@ -15,11 +38,11 @@ public class Main {
 
         man.openWardbobe(wardrobe);//открыли дверь в шкаф
         stepDelimiter();
-        man.call_cat(cat);//позвать кошку
+        man.call(cat);//позвать кошку
         stepDelimiter();
-        man.feed_to_cat(cat, 10);//покормить кошку
+        man.feed_to(cat, 10);//покормить кошку
         stepDelimiter();
-        man.pet_a_cat(cat);//приласкать кошку
+        man.pet(cat);//приласкать кошку
         stepDelimiter();
         man.setItemInWardrobe(wardrobe, item1, 1);//положить чашку в шкаф
         stepDelimiter();
@@ -35,7 +58,7 @@ public class Main {
         item2 = man.getItemInWardrobe(wardrobe, 1);//вынуть корм из шкафа
         System.out.println(item2.getName());
         stepDelimiter();
-        man.setItemInWardrobe(wardrobe, item3,1);
+        man.setItemInWardrobe(wardrobe, item3, 1);
         stepDelimiter();
         man.closeWardbobe(wardrobe);//закрыли дверь шкафа
         stepDelimiter();
@@ -44,10 +67,9 @@ public class Main {
         man.openWardbobe(wardrobe); //открыли дверь
         stepDelimiter();
         man.viewInWardrobe(wardrobe); //посмотрели предметы в шкафу
-
     }
 
-    static void stepDelimiter(){
+    static void stepDelimiter() {
         System.out.println(" ----- ");
     }
 }

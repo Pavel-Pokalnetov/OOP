@@ -11,4 +11,7 @@ public interface CreatureAction {
     void reaction();
 
     void reply();
+
+    void call(BaseCreature obg);
+
 }
