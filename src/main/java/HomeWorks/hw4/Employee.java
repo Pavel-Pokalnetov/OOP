@@ -52,4 +52,9 @@ class Employee implements Comparable<Employee> {
     public int hashCode() {
         return Objects.hash(name, post);
     }
+
+    @Override
+    public String toString() {
+        return name + post;
+    }
 }

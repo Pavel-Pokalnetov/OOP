@@ -29,38 +29,12 @@ public class Task implements Comparable<Task> {
                 ",\n\t Старт: " + startDate +
                 ",\n\t Дедлайн: " + deadline + "}";
     }
+
     private static Date string2date(String strDate) throws ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("yyyy.MM.dd");
         Date date = parser.parse(strDate);
         return date;
     }
-    public static Task getTaskManualInput() {
-
-        System.out.println("Добавление задачи");
-        String authorName = KeyScanner.getText("Автор (имя): ");
-        String authorPost = KeyScanner.getText("Автор (должность): ");
-
-        String controllerName = KeyScanner.getText("Контроллер (имя): ");
-        String controllerPost = KeyScanner.getText("Контроллер (должность): ");
-
-        var author = Employee.getEmployee(authorName,authorPost);
-        var controller = Employee.getEmployee(controllerName, controllerPost);
-
-        String descriptin = KeyScanner.getText("Задача: " );
-        String startDate = KeyScanner.getText("Дата начала (YYYY.MM.DD): ");
-        String deadline = KeyScanner.getText("Дата окончания (YYYY.MM.DD): ");
-        String prt = KeyScanner.getText("Приоритет (higt|normal|low)): ");
-        Priority priority = switch (prt) {
-            case "higt" -> Priority.higt;
-            case "low" -> Priority.low;
-            default -> Priority.normal;
-        };
-
-        return new Task(author,controller,descriptin,priority,startDate,deadline);
-
-    }
-
-
 
     public Task(Employee autor,
                 Employee controller,
@@ -148,5 +122,16 @@ public class Task implements Comparable<Task> {
                 createDate,
                 startDate,
                 deadline);
+    }
+
+    public boolean findString(String str) {
+        StringBuilder analisedDataStr = new StringBuilder().
+                append(id).
+                append(this.autor).
+                append(this.controller).
+                append(this.description).
+                append(this.priority).
+                append(createDate).append(startDate).append(deadline);
+        return analisedDataStr.indexOf(str) >= 0;
     }
 }

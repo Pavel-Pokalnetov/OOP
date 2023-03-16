@@ -13,7 +13,6 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         this.taskPool = new ArrayList<>();
     }
 
-
     @Override
     public ArrayList<Task> getCurrentTasks() {
         return null;
@@ -23,12 +22,6 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     public ArrayList<Task> getOverdueTasks() {
         return null;
     }
-
-    @Override
-    public void addTask(Task task) {
-        taskPool.add(task);
-    }
-
 
     @Override
     public void delTask(Task task) {
@@ -47,25 +40,13 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     @Override
     public ArrayList<Task> searchTasks(String findRequest) {
         ArrayList<Task> result = new ArrayList<>();
-
-
+        for (Task t : taskPool) {
+            if (t.findString(findRequest))result.add(t);
+        }
+        if (result.size()>0) return result;
         return null;
     }
 
-    @Override
-    public void searchTasks() {
-        System.out.println("Поиск данных.");
-        String stringForSearch = KeyScanner.getText("Строка для поиска: ");
-        ArrayList<Task> searchResult = searchTasks(stringForSearch);
-        if (searchResult!=null && searchResult.size() > 0) {
-            System.out.println("Найдены задачи");
-            for (Task i : searchResult) {
-                System.out.println(i);
-            }
-        }else{
-            System.out.println("Ничего не найдено");
-        }
-    }
 
     @Override
     public Scheduler tasksLoad(String filename) {
@@ -79,7 +60,8 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         return false;
     }
 
-    public void addTask() {
-        taskPool.add(Task.getTaskManualInput());
+    public void addTask(Task task) {
+        if (task==null) return;
+        taskPool.add(task);
     }
 }
