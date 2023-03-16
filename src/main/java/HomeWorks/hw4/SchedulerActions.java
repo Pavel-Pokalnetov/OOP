@@ -11,5 +11,7 @@ public interface SchedulerActions {
     void delTask(Task task);
 
     void viewTasks();
-    ArrayList<Task> findTasks(String findRequest);
+    ArrayList<Task> searchTasks(String findRequest);
+
+    void searchTasks();
 }

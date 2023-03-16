@@ -26,22 +26,45 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
 
     @Override
     public void addTask(Task task) {
-
+        taskPool.add(task);
     }
+
 
     @Override
     public void delTask(Task task) {
-
+        taskPool.remove(task);
     }
 
     @Override
     public void viewTasks() {
+        taskPool.sort(new SortByPriority());
+        for (Task t : taskPool) {
+            System.out.println(t);
+        }
+    }
 
+
+    @Override
+    public ArrayList<Task> searchTasks(String findRequest) {
+        ArrayList<Task> result = new ArrayList<>();
+
+
+        return null;
     }
 
     @Override
-    public ArrayList<Task> findTasks(String findRequest) {
-        return null;
+    public void searchTasks() {
+        System.out.println("Поиск данных.");
+        String stringForSearch = KeyScanner.getText("Строка для поиска: ");
+        ArrayList<Task> searchResult = searchTasks(stringForSearch);
+        if (searchResult!=null && searchResult.size() > 0) {
+            System.out.println("Найдены задачи");
+            for (Task i : searchResult) {
+                System.out.println(i);
+            }
+        }else{
+            System.out.println("Ничего не найдено");
+        }
     }
 
     @Override
@@ -54,5 +77,9 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     @Override
     public boolean tasksSave(ArrayList<Task> tasksPool) {
         return false;
+    }
+
+    public void addTask() {
+        taskPool.add(Task.getTaskManualInput());
     }
 }
