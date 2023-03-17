@@ -1,6 +1,7 @@
 package HomeWorks.hw4;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     ArrayList<Task> taskPool = new ArrayList<>();
@@ -45,6 +46,19 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         }
         if (result.size()>0) return result;
         return null;
+    }
+
+    public int deleteTaskBySearch(String searchString){
+        int count = 0;
+        Iterator<Task> iterTaskPool = taskPool.iterator();
+        while(iterTaskPool.hasNext()){
+            Task t = iterTaskPool.next();
+            if (t.findString(searchString)) {
+                iterTaskPool.remove();
+                count++;
+            };
+        }
+        return count;
     }
 
 
