@@ -1,6 +1,7 @@
 package HomeWorks.hw4;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Controller {
     Menu mainmenu;
@@ -24,10 +25,31 @@ public class Controller {
 
     private void deleteTaskMenu() {
         Menu menu = new Menu("Удаление задачи");
-        menu.add("1", "Удаление по id", (Runnable) this::deleteTaskId);
-        menu.add("2", "Удаление по строке поиска", (Runnable) this::deleteTaskSearch);
+        menu.add("1", "Удаление по строке поиска", (Runnable) this::deleteTaskSearch);
         menu.addStop("0", "Выход");
         menu.run();
+    }
+
+    private void deleteTaskSearch() {
+        System.out.println("Удаление по строке поиска.");
+        String stringForSearch = KeyScanner.getText("Строка для поиска: ");
+        ArrayList<Task> searchResult = sc.searchTasks(stringForSearch);
+        if (searchResult != null && searchResult.size() > 0) {
+            System.out.println("Найдены задачи для удаления");
+            for (Task i : searchResult) {
+                System.out.println(i);
+            }
+            String response = KeyScanner.getText("Удаляем (да - д|y):").toLowerCase();
+            if ("д".equals(response) || "y".equals(response)) {
+                System.out.printf("удалено %d задач\n", sc.deleteTaskBySearch(stringForSearch));
+            }
+        } else {
+            System.out.println("Ничего не найдено");
+        }
+    }
+
+    private void deleteTaskId() {
+
     }
 
     private void addTask() {
