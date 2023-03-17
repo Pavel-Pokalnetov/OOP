@@ -2,7 +2,6 @@ package HomeWorks.Scheduler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -13,7 +12,6 @@ public class Task implements Comparable<Task> {
     private Employee controller;
     private String description;
     private Priority priority;
-
     private Date createDate;
     private String startDate;
     private String deadline;
@@ -30,22 +28,22 @@ public class Task implements Comparable<Task> {
                 ",\n\t Дедлайн: " + deadline;
     }
 
-    private static Date string2date(String strDate) throws ParseException {
-        SimpleDateFormat parser = new SimpleDateFormat("yyyy.MM.dd");
-        Date date = parser.parse(strDate);
-        return date;
-    }
+//    private static Date string2date(String strDate) throws ParseException {
+//        SimpleDateFormat parser = new SimpleDateFormat("yyyy.MM.dd");
+//        Date date = parser.parse(strDate);
+//        return date;
+//    }
+
     private static Date string2dateTime(String strDate) throws ParseException {
         SimpleDateFormat parser = new SimpleDateFormat("yyyy.MM.dd-hh:mm:ss");
         Date date = parser.parse(strDate);
         return date;
     }
 
-
-    private String date2string(Date date) {
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
-        return formatForDateNow.format(date);
-    }
+//    private String date2string(Date date) {
+//        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
+//        return formatForDateNow.format(date);
+//    }
 
     private String dateTime2string(Date date) {
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd-hh:mm:ss");
@@ -67,40 +65,12 @@ public class Task implements Comparable<Task> {
         id = UUID.randomUUID();
     }
 
-    public UUID getId() {
-        return id;
-    }
-
     public Employee getAuthor() {
         return author;
     }
 
-    public void setAuthor(Employee author) {
-        this.author = author;
-    }
-
-    public Employee getController() {
-        return controller;
-    }
-
-    public void setController(Employee controller) {
-        this.controller = controller;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public Priority getPriority() {
         return priority;
-    }
-
-    public void setPriority(Priority priority) {
-        this.priority = priority;
     }
 
     public Date getCreateDate() {
@@ -141,8 +111,8 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean findString(String str) {
-        String analysedDataStr = getCSV();
-        return analysedDataStr.toLowerCase().contains(str);
+        String analysedDataStr = getCSV().toLowerCase();
+        return analysedDataStr.contains(str.toLowerCase());
     }
 
     public String getCSV() {
@@ -158,9 +128,15 @@ public class Task implements Comparable<Task> {
         return analysedDataStr;
     }
 
+    /**
+     * Парсинг строки в задачу
+     *
+     * @param readingTaskString
+     * @return - new Task()
+     * @throws ParseException
+     */
     public static Task parse(String readingTaskString) throws ParseException {
         String[] parseArray = readingTaskString.replaceAll("\n", "").split("\\|");
-
         var id = UUID.fromString(parseArray[0]);
         var author = Employee.getEmployee(parseArray[1], parseArray[2]);
         var controller = Employee.getEmployee(parseArray[3], parseArray[4]);
@@ -173,7 +149,7 @@ public class Task implements Comparable<Task> {
         var createDate = string2dateTime(parseArray[7]);
         var startDate = parseArray[8];
         var deadline = parseArray[9];
-        Task task = new Task(author,controller,description,priority,startDate,deadline);
+        Task task = new Task(author, controller, description, priority, startDate, deadline);
         task.setCreateDate(createDate);
         task.setId(id);
         return task;

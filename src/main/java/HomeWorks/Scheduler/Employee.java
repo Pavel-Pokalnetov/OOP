@@ -6,18 +6,10 @@ class Employee implements Comparable<Employee> {
     String name;
     String post;
 
-
-    public Employee(String name) {
-        this.name = name;
-        post = "";
-
-    }
-
     public Employee(String name, String post) {
         this.name = name;
         this.post = post;
     }
-
 
     public static Employee getEmployee(String name, String post) {
         return new Employee(name, post);
@@ -26,11 +18,6 @@ class Employee implements Comparable<Employee> {
     public String getPost() {
         return post;
     }
-
-    public void setPost(String post) {
-        this.post = post;
-    }
-
 
     public String getFullName() {
         return name;

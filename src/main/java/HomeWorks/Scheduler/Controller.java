@@ -17,7 +17,6 @@ public class Controller {
      * Главное меню
      */
     public void run() {
-
         mainmenu = new Menu("Главное меню");
         mainmenu.addStop("0", "Выход");
         mainmenu.add("1", "Вывод всех задач", this::viewTasks);
@@ -27,9 +26,7 @@ public class Controller {
         mainmenu.add("5", "Сохранить", this::saveScMenu);
         mainmenu.add("6", "Загрузить", this::loadSC);
         mainmenu.add("7", "Инфо", this::getInfo);
-
         mainmenu.run();
-
     }
 
     private void loadSC() {
@@ -40,7 +37,6 @@ public class Controller {
             System.out.println("отмена...");
             return;
         }
-
         this.fileName = fName;
         if (sc.tasksLoad(fileName)) {
             System.out.println("Данные загружены");
@@ -67,7 +63,10 @@ public class Controller {
             saveScAs();
             return;
         }
-        sc.tasksSave(fileName);
+        if (sc.tasksSave(fileName)) {
+            System.out.println("данные записаны");
+            modify = false;
+        }
     }
 
     private void saveScAs() {
@@ -83,7 +82,6 @@ public class Controller {
             modify = false;
         }
     }
-
 
     private void deleteTaskMenu() {
         Menu menu = new Menu("Удаление задачи");
@@ -111,7 +109,6 @@ public class Controller {
             System.out.println("Ничего не найдено");
         }
     }
-
 
     /**
      * Добавление задачи
@@ -141,16 +138,19 @@ public class Controller {
      * Просмотр всех задач
      */
     private void viewTasks() {
+        if (sc.getSize()==0){
+            System.out.println("Задач нет");
+            return;
+        }
         sc.viewTasks();
     }
-
 
     /**
      * Поиск задачи по введенной строке
      */
     public void searchTasks() {
         System.out.println("Поиск данных.");
-        String stringForSearch = KeyScanner.getText("Строка для поиска (пусто для отмены): ").toLowerCase();
+        String stringForSearch = KeyScanner.getText("Строка для поиска (пусто для отмены): ");
         if (stringForSearch.isBlank()) return;
         ArrayList<Task> searchResult = sc.searchTasks(stringForSearch);
         if (searchResult != null && searchResult.size() > 0) {
@@ -166,17 +166,17 @@ public class Controller {
 
     public void getInfo() {
         System.out.println("Сводная информация");
-        System.out.printf("Всего записей: %d\n", sc.getSize());
-        System.out.print("Файл: ");
+        System.out.printf("\tВсего записей: %d\n", sc.getSize());
+        System.out.print("\tФайл: ");
         if (!"".equals(fileName)) {
             System.out.println(fileName);
         } else {
             System.out.println(" --- ");
         }
         if (modify) {
-            System.out.println("Изменения не записаны");
+            System.out.println("\tИзменения не записаны");
         } else {
-            System.out.println("Изменения записаны");
+            System.out.println("\tИзменения записаны");
         }
     }
 }

@@ -16,7 +16,6 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         this.taskPool = new ArrayList<>();
     }
 
-
     public ArrayList<Task> getTaskPool() {
         return taskPool;
     }
@@ -41,7 +40,6 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     @Override
     public void clear() {
         taskPool = new ArrayList<>();
-
     }
 
     /**
@@ -60,9 +58,7 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         for (Task t : taskPool) {
             System.out.println(t + "\n");
         }
-
     }
-
 
     @Override
     public ArrayList<Task> searchTasks(String findRequest) {
@@ -88,21 +84,17 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         return count;
     }
 
-
     @Override
     public boolean tasksLoad(String filename) {
         String f;
         Scheduler newSc = new Scheduler();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-
             while ((f = reader.readLine()) != null) {
                 Task task = Task.parse(f);
                 newSc.addTask(task);
             }
             this.taskPool = newSc.getTaskPool();
             return true;
-
-
         } catch (IOException ex) {
             System.out.println("Ошибка чтения");
         } catch (ParseException e) {
@@ -110,7 +102,6 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         }
         return false;
     }
-
 
     @Override
     public boolean tasksSave(String fileName) {
@@ -125,7 +116,6 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
             System.out.println("ошибка записи файла " + fileName);
             return false;
         }
-
     }
 
     @Override

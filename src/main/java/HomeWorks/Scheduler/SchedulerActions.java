@@ -32,8 +32,8 @@ public interface SchedulerActions {
 
     /**
      * Получить список задач удовлетворяющих поиску по строке в параметре
+     *
      * @param findRequest - строка для поиска в списке
      */
     ArrayList<Task> searchTasks(String findRequest);
-
 }
