@@ -42,8 +42,9 @@ public class Controller {
         if (sc.tasksLoad(fileName)) {
             System.out.println("Данные загружены");
             this.getInfo();
+        } else {
+            System.out.println("данные не загружены");
         }
-        ;
     }
 
     /**
