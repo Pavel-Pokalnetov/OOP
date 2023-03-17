@@ -42,21 +42,21 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     public ArrayList<Task> searchTasks(String findRequest) {
         ArrayList<Task> result = new ArrayList<>();
         for (Task t : taskPool) {
-            if (t.findString(findRequest))result.add(t);
+            if (t.findString(findRequest)) result.add(t);
         }
-        if (result.size()>0) return result;
+        if (result.size() > 0) return result;
         return null;
     }
 
-    public int deleteTaskBySearch(String searchString){
+    public int deleteTaskBySearch(String searchString) {
         int count = 0;
         Iterator<Task> iterTaskPool = taskPool.iterator();
-        while(iterTaskPool.hasNext()){
+        while (iterTaskPool.hasNext()) {
             Task t = iterTaskPool.next();
             if (t.findString(searchString)) {
                 iterTaskPool.remove();
                 count++;
-            };
+            }
         }
         return count;
     }
@@ -75,7 +75,7 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     }
 
     public void addTask(Task task) {
-        if (task==null) return;
+        if (task == null) return;
         taskPool.add(task);
     }
 }

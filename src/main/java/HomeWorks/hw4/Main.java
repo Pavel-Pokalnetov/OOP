@@ -9,10 +9,11 @@ public class Main {
         controller.run();
         System.out.println("Работа завершена");
     }
-
-
-    /** методля за заполнения одной задачи
+    
+    /**
+     * методля за заполнения одной задачи
      * чисто для отладки
+     *
      * @param sc
      */
     private static void firsLoad(Scheduler sc) {
