@@ -1,4 +1,4 @@
-package HomeWorks.hw4;
+package HomeWorks.Scheduler;
 
 import java.util.ArrayList;
 import java.util.Collections;

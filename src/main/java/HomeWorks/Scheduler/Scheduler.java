@@ -1,8 +1,9 @@
-package HomeWorks.hw4;
+package HomeWorks.Scheduler;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.io.*;
 
 public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
 
@@ -20,11 +21,19 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         this.taskPool = new ArrayList<>();
     }
 
+    /**
+     * получить текущие задачи
+     * @return
+     */
     @Override
     public ArrayList<Task> getCurrentTasks() {
         return null;
     }
 
+    /**
+     * получить просроченные задачи
+     * @return
+     */
     @Override
     public ArrayList<Task> getOverdueTasks() {
         return null;
@@ -71,10 +80,11 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
 
 
     @Override
-    public Scheduler tasksLoad(String filename) {
-        ArrayList<Task> tasks = new ArrayList<>();
-        // вставить метод загрузки из файла
-        return new Scheduler(tasks);
+    public boolean tasksLoad(String filename) {
+
+
+
+        return false;
     }
 
     @Override

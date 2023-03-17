@@ -1,6 +1,4 @@
-package HomeWorks.hw4;
-
-import HomeWorks.hw1.task2_3.CreatureAction;
+package HomeWorks.Scheduler;
 
 import java.util.Comparator;
 

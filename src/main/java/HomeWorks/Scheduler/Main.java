@@ -1,4 +1,4 @@
-package HomeWorks.hw4;
+package HomeWorks.Scheduler;
 
 public class Main {
     public static void main(String[] args) {

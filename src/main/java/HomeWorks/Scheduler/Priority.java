@@ -1,4 +1,4 @@
-package HomeWorks.hw4;
+package HomeWorks.Scheduler;
 
 enum Priority {
     higt,

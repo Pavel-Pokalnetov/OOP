@@ -1,4 +1,4 @@
-package HomeWorks.hw4;
+package HomeWorks.Scheduler;
 
 public interface TasksSaver {
     void tasksSave(String fileName);

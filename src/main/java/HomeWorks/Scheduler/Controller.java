@@ -1,4 +1,4 @@
-package HomeWorks.hw4;
+package HomeWorks.Scheduler;
 
 import java.util.ArrayList;
 
@@ -18,19 +18,32 @@ public class Controller {
     public void run() {
         mainmenu = new Menu("Главное меню");
         mainmenu.addStop("0", "Выход");
-        mainmenu.add("1", "Вывод всех задач", (Runnable) this::viewTasks);
-        mainmenu.add("2", "Добавление задач", (Runnable) this::addTask);
-        mainmenu.add("3", "Удаление задачи", (Runnable) this::deleteTaskMenu);
-        mainmenu.add("4", "Поиск задач", (Runnable) this::searchTasks);
-        mainmenu.add("5", "Сохранить", (Runnable) this::saveScMenu);
-        mainmenu.add("6", "Загрузить", (Runnable) this::loadSC);
-        mainmenu.add("7", "Инфо", (Runnable) this::getInfo);
+        mainmenu.add("1", "Вывод всех задач", this::viewTasks);
+        mainmenu.add("2", "Добавление задач", this::addTask);
+        mainmenu.add("3", "Удаление задачи", this::deleteTaskMenu);
+        mainmenu.add("4", "Поиск задач", this::searchTasks);
+        mainmenu.add("5", "Сохранить", this::saveScMenu);
+        mainmenu.add("6", "Загрузить", this::loadSC);
+        mainmenu.add("7", "Инфо", this::getInfo);
 
         mainmenu.run();
     }
 
     private void loadSC() {
+        System.out.println("Загрузить данные");
+        System.out.println("Задайте имя файла");
+        String fName = KeyScanner.getText("Имя: ");
+        if ("".equals(fName)) {
+            System.out.println("отмена...");
+            return;
+        }
 
+        this.fileName = fName;
+        if (sc.tasksLoad(fileName)) {
+            System.out.println("Данные загружены");
+            this.getInfo();
+        }
+        ;
     }
 
     /**
@@ -66,7 +79,7 @@ public class Controller {
 
     private void deleteTaskMenu() {
         Menu menu = new Menu("Удаление задачи");
-        menu.add("1", "Удаление по строке поиска", (Runnable) this::deleteTaskSearch);
+        menu.add("1", "Удаление по строке поиска", this::deleteTaskSearch);
         menu.addStop("0", "Выход");
         menu.run();
     }

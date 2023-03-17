@@ -1,4 +1,4 @@
-package HomeWorks.hw4;
+package HomeWorks.Scheduler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
