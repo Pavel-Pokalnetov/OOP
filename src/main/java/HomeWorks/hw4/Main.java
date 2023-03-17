@@ -9,17 +9,17 @@ public class Main {
         controller.run();
         System.out.println("Работа завершена");
     }
-    
+
     /**
-     * методля за заполнения одной задачи
+     * метод для за заполнения одной задачи
      * чисто для отладки
      *
      * @param sc
      */
     private static void firsLoad(Scheduler sc) {
-        Employee autor = new Employee("Покальнетов Павел Сергеевич", "студент");
-        Employee teacher = new Employee("Гилев Aнтон", "преподаватель");
-        sc.addTask(new Task(autor,
+        Employee author = new Employee("Покальнетов Павел Сергеевич", "студент");
+        Employee teacher = new Employee("Гилев Антон", "преподаватель");
+        sc.addTask(new Task(author,
                 teacher,
                 "Работа над домашним заданием №4",
                 Priority.higt,

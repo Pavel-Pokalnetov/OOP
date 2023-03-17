@@ -74,9 +74,8 @@ public class Menu {
                 if (i.getLiter().equals(key)) {
                     System.out.println();
                     i.run();//запуск задачи из пункта меню
-                    System.out.println();
+                    System.out.println("");
                 }
-
             }
         }
     }

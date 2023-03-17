@@ -13,14 +13,14 @@ class Employee implements Comparable<Employee> {
 
     }
 
-    public Employee(String name,String post) {
+    public Employee(String name, String post) {
         this.name = name;
         this.post = post;
     }
 
 
     public static Employee getEmployee(String name, String post) {
-        return new Employee(name,post);
+        return new Employee(name, post);
     }
 
     public String getPost() {
@@ -38,7 +38,7 @@ class Employee implements Comparable<Employee> {
 
     @Override
     public int compareTo(Employee obj) {
-        return (name+post).compareTo(obj.getFullName()+obj.getPost());
+        return (name + post).compareTo(obj.getFullName() + obj.getPost());
     }
 
     @Override
@@ -55,6 +55,6 @@ class Employee implements Comparable<Employee> {
 
     @Override
     public String toString() {
-        return name + post;
+        return name + " " + post;
     }
 }

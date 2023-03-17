@@ -2,9 +2,15 @@ package HomeWorks.hw4;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.io.*;
 
 public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
-    ArrayList<Task> taskPool = new ArrayList<>();
+
+    public int getSize() {
+        return taskPool.size();
+    }
+
+    private ArrayList<Task> taskPool = new ArrayList<>();
 
     public Scheduler(ArrayList<Task> taskPool) {
         this.taskPool = taskPool;
@@ -33,8 +39,9 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     public void viewTasks() {
         taskPool.sort(new SortByPriority());
         for (Task t : taskPool) {
-            System.out.println(t);
+            System.out.println(t + "\n");
         }
+
     }
 
 
@@ -47,6 +54,7 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         if (result.size() > 0) return result;
         return null;
     }
+
 
     public int deleteTaskBySearch(String searchString) {
         int count = 0;
@@ -70,8 +78,16 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     }
 
     @Override
-    public boolean tasksSave(ArrayList<Task> tasksPool) {
-        return false;
+    public void tasksSave(String fileName) {
+        try (FileWriter writer = new FileWriter(fileName, false)) {
+            for (Task t : taskPool) {
+                String text = t.getCSV() + "\n";
+                writer.write(text);
+            }
+            writer.flush();
+        } catch (IOException ex) {
+            System.out.println("ошибка записи файла " + fileName);
+        }
     }
 
     public void addTask(Task task) {

@@ -2,14 +2,13 @@ package HomeWorks.hw4;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
 public class Task implements Comparable<Task> {
     private UUID id;
-    private Employee autor;
+    private Employee author;
     private Employee controller;
     private String description;
     private Priority priority;
@@ -21,7 +20,7 @@ public class Task implements Comparable<Task> {
     @Override
     public String toString() {
         return "Задача id: " + id + "{" +
-                "\n\t Автор: " + autor.getFullName() +
+                "\n\t Автор: " + author.getFullName() +
                 ",\n\t Контроллер: " + controller.getFullName() +
                 ",\n\t Описание: " + description +
                 ",\n\t Приоритет: " + priority +
@@ -41,7 +40,7 @@ public class Task implements Comparable<Task> {
                 String description,
                 Priority priority,
                 String startDate, String deadline) {
-        this.autor = autor;
+        this.author = autor;
         this.controller = controller;
         this.description = description;
         this.priority = priority;
@@ -55,12 +54,12 @@ public class Task implements Comparable<Task> {
         return id;
     }
 
-    public Employee getAutor() {
-        return autor;
+    public Employee getAuthor() {
+        return author;
     }
 
-    public void setAutor(Employee autor) {
-        this.autor = autor;
+    public void setAuthor(Employee author) {
+        this.author = author;
     }
 
     public Employee getController() {
@@ -104,7 +103,7 @@ public class Task implements Comparable<Task> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Task task)) return false;
-        return autor.equals(task.autor) &&
+        return author.equals(task.author) &&
                 controller.equals(task.controller) &&
                 description.equals(task.description) &&
                 priority == task.priority &&
@@ -115,7 +114,7 @@ public class Task implements Comparable<Task> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(autor,
+        return Objects.hash(author,
                 controller,
                 description,
                 priority,
@@ -125,13 +124,20 @@ public class Task implements Comparable<Task> {
     }
 
     public boolean findString(String str) {
-        StringBuilder analisedDataStr = new StringBuilder().
-                append(id).
-                append(this.autor).
-                append(this.controller).
-                append(this.description).
-                append(this.priority).
-                append(createDate).append(startDate).append(deadline);
-        return analisedDataStr.indexOf(str) >= 0;
+        String analysedDataStr = getCSV();
+        return analysedDataStr.toLowerCase().contains(str);
+    }
+
+    public String getCSV() {
+        String analysedDataStr = id + "," +
+                this.author.getFullName() + "," +
+                this.author.getPost() + "," +
+                this.controller.getFullName() + "," +
+                this.controller.getPost() + "," +
+                this.description + "," +
+                this.priority + "," +
+                createDate + "," +
+                startDate + "," + deadline;
+        return analysedDataStr;
     }
 }
