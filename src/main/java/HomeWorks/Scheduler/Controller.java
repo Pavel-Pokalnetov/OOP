@@ -13,7 +13,7 @@ public class Controller {
     }
 
     /**
-     * главное меню
+     * Главное меню
      */
     public void run() {
         mainmenu = new Menu("Главное меню");
@@ -52,13 +52,13 @@ public class Controller {
      */
     private void saveScMenu() {
         Menu menu = new Menu("Сохранить данные");
-        menu.add("1", "Сохранить", (Runnable) this::saveScDeff);
+        menu.add("1", "Сохранить", (Runnable) this::saveScDefaultName);
         menu.add("2", "Сохранить как...", (Runnable) this::saveScAs);
         menu.addStop("0", "Выход");
         menu.run();
     }
 
-    private void saveScDeff() {
+    private void saveScDefaultName() {
         if ("".equals(fileName)) {
             saveScAs();
             return;
@@ -105,7 +105,7 @@ public class Controller {
 
 
     /**
-     * добавление задачи
+     * Добавление задачи
      */
     private void addTask() {
         System.out.println("Добавление задачи");
@@ -118,9 +118,9 @@ public class Controller {
         String description = KeyScanner.getText("Задача: ");
         String startDate = KeyScanner.getText("Дата начала (YYYY.MM.DD): ");
         String deadline = KeyScanner.getText("Дата окончания (YYYY.MM.DD): ");
-        String prt = KeyScanner.getText("Приоритет (higt|normal|low)): ");
+        String prt = KeyScanner.getText("Приоритет (high|normal|low)): ");
         Priority priority = switch (prt) {
-            case "higt" -> Priority.higt;
+            case "higt" -> Priority.high;
             case "low" -> Priority.low;
             default -> Priority.normal;
         };
@@ -128,7 +128,7 @@ public class Controller {
     }
 
     /**
-     * просмотр всех задач
+     * Просмотр всех задач
      */
     private void viewTasks() {
         sc.viewTasks();
@@ -136,7 +136,7 @@ public class Controller {
 
 
     /**
-     * поиск задачи по введенной строке
+     * Поиск задачи по введенной строке
      */
     public void searchTasks() {
         System.out.println("Поиск данных.");

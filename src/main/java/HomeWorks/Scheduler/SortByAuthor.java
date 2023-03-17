@@ -2,7 +2,7 @@ package HomeWorks.Scheduler;
 
 import java.util.Comparator;
 
-public class SortByAutor implements Comparator<Task> {
+public class SortByAuthor implements Comparator<Task> {
     @Override
     public int compare(Task o1, Task o2) {
         return (o1.getAuthor().compareTo(o2.getAuthor()));

@@ -22,7 +22,7 @@ public class MainApp {
         sc.addTask(new Task(author,
                 teacher,
                 "Работа над домашним заданием №4",
-                Priority.higt,
+                Priority.high,
                 "2023.03.13",
                 "2023.03.20"));
     }

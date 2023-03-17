@@ -1,7 +1,7 @@
 package HomeWorks.Scheduler;
 
 enum Priority {
-    higt,
+    high,
     normal,
     low
 

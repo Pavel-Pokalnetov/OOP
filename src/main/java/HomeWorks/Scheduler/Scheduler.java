@@ -1,11 +1,8 @@
 package HomeWorks.Scheduler;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 
 public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
 
@@ -13,7 +10,7 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         return taskPool.size();
     }
 
-    private ArrayList<Task> taskPool = new ArrayList<>();
+    private ArrayList<Task> taskPool;
 
     public Scheduler(ArrayList<Task> taskPool) {
         this.taskPool = taskPool;
@@ -24,8 +21,9 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     }
 
     /**
-     * получить текущие задачи
-     * @return
+     * Получить текущие задачи
+     *
+     * @return - список задач
      */
     @Override
     public ArrayList<Task> getCurrentTasks() {
@@ -33,17 +31,22 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
     }
 
     /**
-     * получить просроченные задачи
-     * @return
+     * Очистка списка задач
+     */
+    @Override
+    public void clear() {
+        taskPool = new ArrayList<>();
+
+    }
+
+    /**
+     * Получить просроченные задачи
+     *
+     * @return - список задач
      */
     @Override
     public ArrayList<Task> getOverdueTasks() {
         return null;
-    }
-
-    @Override
-    public void delTask(Task task) {
-        taskPool.remove(task);
     }
 
     @Override
@@ -66,14 +69,14 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         return null;
     }
 
-
+    @Override
     public int deleteTaskBySearch(String searchString) {
         int count = 0;
-        Iterator<Task> iterTaskPool = taskPool.iterator();
-        while (iterTaskPool.hasNext()) {
-            Task t = iterTaskPool.next();
+        Iterator<Task> iteratorTaskPool = taskPool.iterator();
+        while (iteratorTaskPool.hasNext()) {
+            Task t = iteratorTaskPool.next();
             if (t.findString(searchString)) {
-                iterTaskPool.remove();
+                iteratorTaskPool.remove();
                 count++;
             }
         }
@@ -82,10 +85,15 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
 
 
     @Override
-    public boolean tasksLoad(String filename) {;
- 5
-
-
+    public boolean tasksLoad(String filename) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            String f;
+            while ((f = reader.readLine()) != null) {
+                System.out.print(f);
+            }
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
         return false;
     }
 
@@ -102,6 +110,7 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
         }
     }
 
+    @Override
     public void addTask(Task task) {
         if (task == null) return;
         taskPool.add(task);
