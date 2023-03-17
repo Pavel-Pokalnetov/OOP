@@ -35,4 +35,5 @@ public interface SchedulerActions {
      * @param findRequest - строка для поиска в списке
      */
     ArrayList<Task> searchTasks(String findRequest);
+
 }

@@ -1,15 +1,11 @@
 package HomeWorks.Scheduler;
 
 import java.io.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
-
-    public int getSize() {
-        return taskPool.size();
-    }
-
     private ArrayList<Task> taskPool;
 
     public Scheduler(ArrayList<Task> taskPool) {
@@ -18,6 +14,15 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
 
     public Scheduler() {
         this.taskPool = new ArrayList<>();
+    }
+
+
+    public ArrayList<Task> getTaskPool() {
+        return taskPool;
+    }
+
+    public int getSize() {
+        return taskPool.size();
     }
 
     /**
@@ -86,28 +91,41 @@ public class Scheduler implements SchedulerActions, TasksLoader, TasksSaver {
 
     @Override
     public boolean tasksLoad(String filename) {
+        String f;
+        Scheduler newSc = new Scheduler();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String f;
+
             while ((f = reader.readLine()) != null) {
-                System.out.print(f);
+                Task task = Task.parse(f);
+                newSc.addTask(task);
             }
+            this.taskPool = newSc.getTaskPool();
+            return true;
+
+
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            System.out.println("Ошибка чтения");
+        } catch (ParseException e) {
+            System.out.println("Ошибка парсинга данных");
         }
         return false;
     }
 
+
     @Override
-    public void tasksSave(String fileName) {
+    public boolean tasksSave(String fileName) {
         try (FileWriter writer = new FileWriter(fileName, false)) {
             for (Task t : taskPool) {
                 String text = t.getCSV() + "\n";
                 writer.write(text);
             }
             writer.flush();
+            return true;
         } catch (IOException ex) {
             System.out.println("ошибка записи файла " + fileName);
+            return false;
         }
+
     }
 
     @Override

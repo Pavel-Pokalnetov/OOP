@@ -6,6 +6,7 @@ public class Controller {
     Menu mainmenu;
     Scheduler sc;
     String fileName;
+    Boolean modify = true;
 
     public Controller(Scheduler sc) {
         this.sc = sc;
@@ -16,6 +17,7 @@ public class Controller {
      * Главное меню
      */
     public void run() {
+
         mainmenu = new Menu("Главное меню");
         mainmenu.addStop("0", "Выход");
         mainmenu.add("1", "Вывод всех задач", this::viewTasks);
@@ -27,6 +29,7 @@ public class Controller {
         mainmenu.add("7", "Инфо", this::getInfo);
 
         mainmenu.run();
+
     }
 
     private void loadSC() {
@@ -41,7 +44,8 @@ public class Controller {
         this.fileName = fName;
         if (sc.tasksLoad(fileName)) {
             System.out.println("Данные загружены");
-            this.getInfo();
+            modify = false;
+            getInfo();
         } else {
             System.out.println("данные не загружены");
         }
@@ -52,8 +56,8 @@ public class Controller {
      */
     private void saveScMenu() {
         Menu menu = new Menu("Сохранить данные");
-        menu.add("1", "Сохранить", (Runnable) this::saveScDefaultName);
-        menu.add("2", "Сохранить как...", (Runnable) this::saveScAs);
+        menu.add("1", "Сохранить", this::saveScDefaultName);
+        menu.add("2", "Сохранить как...", this::saveScAs);
         menu.addStop("0", "Выход");
         menu.run();
     }
@@ -74,7 +78,10 @@ public class Controller {
             return;
         }
         this.fileName = fName;
-        sc.tasksSave(fileName);
+        if (sc.tasksSave(fileName)) {
+            System.out.println("данные записаны");
+            modify = false;
+        }
     }
 
 
@@ -93,11 +100,13 @@ public class Controller {
             System.out.println("Найдены задачи для удаления");
             for (Task i : searchResult) {
                 System.out.println(i);
+                System.out.println("--------------------------------------------");
             }
             String response = KeyScanner.getText("Удаляем (да - д|y):").toLowerCase();
             if ("д".equals(response) || "y".equals(response)) {
                 System.out.printf("удалено %d задач\n", sc.deleteTaskBySearch(stringForSearch));
             }
+            this.modify = true;
         } else {
             System.out.println("Ничего не найдено");
         }
@@ -120,11 +129,12 @@ public class Controller {
         String deadline = KeyScanner.getText("Дата окончания (YYYY.MM.DD): ");
         String prt = KeyScanner.getText("Приоритет (high|normal|low)): ");
         Priority priority = switch (prt) {
-            case "higt" -> Priority.high;
+            case "high" -> Priority.high;
             case "low" -> Priority.low;
             default -> Priority.normal;
         };
         sc.addTask(new Task(author, controller, description, priority, startDate, deadline));
+        modify = true;
     }
 
     /**
@@ -141,7 +151,7 @@ public class Controller {
     public void searchTasks() {
         System.out.println("Поиск данных.");
         String stringForSearch = KeyScanner.getText("Строка для поиска (пусто для отмены): ").toLowerCase();
-        if ("".equals(stringForSearch)) return;
+        if (stringForSearch.isBlank()) return;
         ArrayList<Task> searchResult = sc.searchTasks(stringForSearch);
         if (searchResult != null && searchResult.size() > 0) {
             System.out.println("Найдены задачи");
@@ -158,10 +168,15 @@ public class Controller {
         System.out.println("Сводная информация");
         System.out.printf("Всего записей: %d\n", sc.getSize());
         System.out.print("Файл: ");
-        if (!"".equals(this.fileName)) {
+        if (!"".equals(fileName)) {
             System.out.println(fileName);
         } else {
             System.out.println(" --- ");
+        }
+        if (modify) {
+            System.out.println("Изменения не записаны");
+        } else {
+            System.out.println("Изменения записаны");
         }
     }
 }
