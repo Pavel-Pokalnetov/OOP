@@ -8,8 +8,9 @@ public class Record implements Comparable<Record> {
     private String name;
     private HashSet<String> phones;
 
-    public Record(String name, String phone) {
+    public Record(String name, String... phone) {
         this.name = name;
+        phones = new HashSet<>();
         addPhone(phone);
     }
 
@@ -26,17 +27,21 @@ public class Record implements Comparable<Record> {
      * @return - true если есть совпадения, иначе false
      */
     public boolean search(String searchStr) {
+        searchStr = searchStr.toLowerCase();
         if (searchStr == null || searchStr.isBlank()) return false;
-        if (name.contains(searchStr)) return true;
+        if (name.toLowerCase().contains(searchStr)) return true;
         for (String p : phones) {
-            if (p.contains(searchStr)) return true;
+            if (p.toLowerCase().contains(searchStr)) return true;
         }
         return false;
     }
 
+    public void addPhone(String number) {
+        this.phones.add(number);
+    }
 
-    public void addPhone(String phone) {
-        phones.add(phone);
+    public void addPhone(String[] phones) {
+        this.phones.addAll(Arrays.asList(phones));
     }
 
     public ArrayList<String> getPhones() {
