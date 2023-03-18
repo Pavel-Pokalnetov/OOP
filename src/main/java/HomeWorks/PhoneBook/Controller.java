@@ -74,7 +74,7 @@ public class Controller {
         String name = Dialog.getText("Имя контакта: ");
         Record record = new Record(name);
         int count = 1;
-        System.out.println("Укажите номера контакта (пусто для завершения)");
+        System.out.println("Укажите номера контакта (пусто для завершения): ");
         while (true) {
             String number = Dialog.getText("#" + count + ": ");
             if (number.isBlank()) break;
@@ -136,7 +136,7 @@ public class Controller {
     }
 
     private void loadRecords() {
-        String filename = Dialog.getText("Имя файла без расширения (пусто для отмены)");
+        String filename = Dialog.getText("Имя файла без расширения (пусто для отмены): ");
         if (filename.isBlank() || filename.isEmpty()) return;
         if (new Import(phonebookStorage, filename).loadPhonebook()) {
             System.out.println("Файл загружен успешно");
