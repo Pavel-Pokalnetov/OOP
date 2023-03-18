@@ -11,6 +11,7 @@ public class View {
      * @param records (List<R>) список записей
      */
     public <R> void printAll(List<R> records) {
+        if (records == null || records.size() == 0) return;
         int i = 1;
         for (R r : records) {
             System.out.printf("%4d %s\n", i++, r);

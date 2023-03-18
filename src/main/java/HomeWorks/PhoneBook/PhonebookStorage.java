@@ -11,14 +11,18 @@ public class PhonebookStorage {
         clear();
     }
 
-    /** Получить все записи из хранилища
+    /**
+     * Получить все записи из хранилища
+     *
      * @return ArrayList<Record>
      */
     public ArrayList<Record> getAll() {
         return new ArrayList<>(poolRecord);
     }
 
-    /** Добавление записи в хранилище
+    /**
+     * Добавление записи в хранилище
+     *
      * @param record - добавляемая запись
      */
     public void addRecord(Record record) {
@@ -32,14 +36,18 @@ public class PhonebookStorage {
         poolRecord = new HashSet<>();
     }
 
-    /** Удаление записи
+    /**
+     * Удаление записи
+     *
      * @param r - удаляемая запись
      */
     public void delRecord(Record r) {
         poolRecord.remove(r);
     }
 
-    /** Замена записи (для целей редактирования)
+    /**
+     * Замена записи (для целей редактирования)
+     *
      * @param oldRecord - исходная запись
      * @param newRecord - измененная запись
      */
@@ -48,4 +56,13 @@ public class PhonebookStorage {
         addRecord(newRecord);
     }
 
+    /** Получить размер списка
+     * @return
+     */
+    public int size() {
+        if (poolRecord == null) {
+            return 0;
+        }
+        return poolRecord.size();
+    }
 }

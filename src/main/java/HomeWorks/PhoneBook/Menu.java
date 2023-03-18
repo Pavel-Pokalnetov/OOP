@@ -75,7 +75,7 @@ public class Menu {
         String key;
         while (true) {
             this.print();
-            key = KeyScanner.getText(">:");
+            key = KeyScanner.getText("  >:");
             if (key.equals(stopLiter)) return;//выход из меню
             for (MenuItem i : menuItems) {
                 if (i.getLiter().equals(key)) {
@@ -88,7 +88,7 @@ public class Menu {
     }
 
     private void print() { //вывод текста меню
-        System.out.print("\033[H\033[2J");
+//        System.out.print("\033[H\033[2J");
         System.out.println(menuName);
         List<MenuItem> list = new ArrayList<MenuItem>(menuItems);
         Collections.sort(list);
