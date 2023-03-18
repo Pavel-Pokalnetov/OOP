@@ -1,9 +1,10 @@
 package HomeWorks.PhoneBook;
 
+import java.io.Serializable;
 import java.rmi.server.UID;
 import java.util.*;
 
-public class Record implements Comparable<Record> {
+public class Record implements Comparable<Record>, Serializable {
     private UID id;
     private String name;
     private HashSet<String> phones;

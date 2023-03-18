@@ -56,13 +56,17 @@ public class PhonebookStorage {
         addRecord(newRecord);
     }
 
-    /** Получить размер списка
-     * @return
+    /**
+     * Получить размер списка
      */
     public int size() {
         if (poolRecord == null) {
             return 0;
         }
         return poolRecord.size();
+    }
+
+    public void setPoolRecords(HashSet<Record> data) {
+        poolRecord = data;
     }
 }

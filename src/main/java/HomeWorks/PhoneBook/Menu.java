@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Menu {
-    class MenuItem implements Runnable, Comparable {
+    static class MenuItem implements Runnable, Comparable {
         public String getLiter() {
             return liter;
         }

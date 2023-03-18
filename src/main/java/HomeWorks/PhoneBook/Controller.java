@@ -29,7 +29,7 @@ public class Controller {
      */
     private void editRecord() {
         ArrayList<Record> records = new ArrayList<>(phonebookStorage.getAll());
-        if (records==null || records.size()==0){
+        if (records.size() == 0) {
             System.out.println("Нечего изменять");
             return;
         }
@@ -37,7 +37,7 @@ public class Controller {
                 String.format("В справочнике %d записей", records.size()));
         String response;
         while (true) {
-            response = KeyScanner.getText("Выберите номер изменяемой записи (пусто для отмены): ");
+            response = Dialog.getText("Выберите номер изменяемой записи (пусто для отмены): ");
             if (response.isEmpty() || response.isBlank()) return;
             try {
                 Integer.parseInt(response);
@@ -46,7 +46,7 @@ public class Controller {
                 System.out.println("неверный ввод");
             }
         }
-        Integer selectedRecordIndex = Integer.parseInt(response) - 1;
+        int selectedRecordIndex = Integer.parseInt(response) - 1;
         if (selectedRecordIndex < 0 || selectedRecordIndex > records.size() - 1) {
             System.out.println("Нет такого номера");
             return;
@@ -67,16 +67,16 @@ public class Controller {
         Record record = manualInputRecord();
         phonebookStorage.addRecord(record);
         System.out.println("Добавлена запись");
-        System.out.println(record.toString());
+        System.out.println(record);
     }
 
     private static Record manualInputRecord() {
-        String name = KeyScanner.getText("Имя контакта: ");
+        String name = Dialog.getText("Имя контакта: ");
         Record record = new Record(name);
         int count = 1;
         System.out.println("Укажите номера контакта (пусто для завершения)");
         while (true) {
-            String number = KeyScanner.getText("#" + count + ": ");
+            String number = Dialog.getText("#" + count + ": ");
             if (number.isBlank()) break;
             record.addPhone(number);
             count++;
@@ -85,13 +85,13 @@ public class Controller {
     }
 
     private void findRecords() {
-        if (phonebookStorage.size()==0){
+        if (phonebookStorage.size() == 0) {
             System.out.println("Нечего изменять");
             return;
         }
         while (true) {
             System.out.println("Поиск ");
-            String searchStr = KeyScanner.getText("Что ищем?(пусто для выхода): ");
+            String searchStr = Dialog.getText("Что ищем?(пусто для выхода): ");
             if (searchStr.isBlank() || searchStr.isEmpty()) return;
             List<Record> result = phonebookStorage.getAll().stream().filter(x -> x.search(searchStr)).toList();
             if (result.size() > 0) {
@@ -108,7 +108,7 @@ public class Controller {
                 String.format("В справочнике %d записей", records.size()));
         String response;
         while (true) {
-            response = KeyScanner.getText("Выберите номер изменяемой записи (пусто для отмены): ");
+            response = Dialog.getText("Выберите номер изменяемой записи (пусто для отмены): ");
             if (response.isEmpty() || response.isBlank()) return;
             try {
                 Integer.parseInt(response);
@@ -117,7 +117,7 @@ public class Controller {
                 System.out.println("неверный ввод");
             }
         }
-        Integer selectedRecordIndex = Integer.parseInt(response) - 1;
+        int selectedRecordIndex = Integer.parseInt(response) - 1;
         if (selectedRecordIndex < 0 || selectedRecordIndex > records.size() - 1) {
             System.out.println("Нет такого номера");
             return;
@@ -128,16 +128,39 @@ public class Controller {
     private void fileOperationMenu() {
         Menu ioMenu = new Menu("Работа с файлами");
         ioMenu.addStop("0", "Назад");
-        ioMenu.add("1", "Импорт данных", this::importRecords);
-        ioMenu.add("2", "Экспорт данных", this::exportRecords);
+        ioMenu.add("1", "Загрузить из *.phbk", this::loadRecords);
+        ioMenu.add("2", "Сохранить в *.phbk", this::saveRecords);//ok
+        ioMenu.add("3", "Экспорт в CSV", this::export2CSV);//ok
+        ioMenu.add("4", "Экспорт в HTML", this::export2HTML);//ok
         ioMenu.run();
     }
 
-    private void importRecords() {
+    private void loadRecords() {
+        String filename = Dialog.getText("Имя файла без расширения (пусто для отмены)");
+        if (filename.isBlank() || filename.isEmpty()) return;
+        if (new Import(phonebookStorage, filename).loadPhonebook()) {
+            System.out.println("Файл загружен успешно");
+        }
     }
 
-    private void exportRecords() {
+    private void saveRecords() {
+        saveByFileType(FileType.phbk);
     }
 
 
+    private void export2CSV() {
+        saveByFileType(FileType.csv);
+    }
+
+    private void export2HTML() {
+        saveByFileType(FileType.html);
+    }
+
+    private void saveByFileType(FileType fileType) {
+        String filename = Dialog.getText("Имя файла без расширения (пусто для отмены): ");
+        if (filename.isBlank() || filename.isEmpty()) return;
+        if (new Export(phonebookStorage, filename).savePhonebook(fileType)) {
+            System.out.println("Файл записан успешно");
+        }
+    }
 }

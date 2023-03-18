@@ -1,17 +1,24 @@
 package HomeWorks.PhoneBook;
 
-public abstract class ImportExport {
+import java.nio.file.Paths;
 
-    private PhonebookStorage pb;
-    private String filename;
+public abstract class ImportExport {
+    PhonebookStorage pb;
+    String filename;
+    ImportExportData data;
 
     public ImportExport(PhonebookStorage pb, String filename) {
         this.pb = pb;
         this.filename = filename;
+        data = new ImportExportData(pb.poolRecord);
     }
 
-    boolean checkFileExist(String filename){
-        return true;
+    public boolean validateFilename(String fileName) {
+        try {
+            Paths.get(fileName);
+        } catch (Exception e) {
+            return true;
+        }
+        return false;
     }
-
 }
