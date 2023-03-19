@@ -11,7 +11,7 @@ public class Export extends ImportExport {
         super(pb, filename);
     }
 
-    boolean savePhonebook(FileType fileType) {
+    public boolean savePhonebook(FileType fileType) {
         switch (fileType) {
             case csv -> {
                 return saveToCSV();
