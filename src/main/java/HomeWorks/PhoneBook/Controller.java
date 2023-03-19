@@ -15,11 +15,11 @@ public class Controller {
     public void run() {
         Menu mainmenu = new Menu("Телефонный справочник.\nГлавное меню");
         mainmenu.addStop("0", "Завершить работу");
-        mainmenu.add("1", "Вывод справочника", this::viewAllRecords);//ok
-        mainmenu.add("2", "Добавить запись", this::addRecord);//ok
-        mainmenu.add("3", "Изменить запись", this::editRecord);//ok
-        mainmenu.add("4", "Поиск", this::findRecords);//ok
-        mainmenu.add("5", "Удаление записи", this::removeRecord);//ok
+        mainmenu.add("1", "Вывод справочника", this::viewAllRecords);
+        mainmenu.add("2", "Добавить запись", this::addRecord);
+        mainmenu.add("3", "Изменить запись", this::editRecord);
+        mainmenu.add("4", "Поиск", this::findRecords);
+        mainmenu.add("5", "Удаление записи", this::removeRecord);
         mainmenu.add("6", "Сохранить/Загрузить", this::fileOperationMenu);
         mainmenu.run();
     }
@@ -129,9 +129,9 @@ public class Controller {
         Menu ioMenu = new Menu("Работа с файлами");
         ioMenu.addStop("0", "Назад");
         ioMenu.add("1", "Загрузить из *.phbk", this::loadRecords);
-        ioMenu.add("2", "Сохранить в *.phbk", this::saveRecords);//ok
-        ioMenu.add("3", "Экспорт в CSV", this::export2CSV);//ok
-        ioMenu.add("4", "Экспорт в HTML", this::export2HTML);//ok
+        ioMenu.add("2", "Сохранить в *.phbk", this::saveRecords);
+        ioMenu.add("3", "Экспорт в CSV", this::export2CSV);
+        ioMenu.add("4", "Экспорт в HTML", this::export2HTML);
         ioMenu.run();
     }
 
