@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class Export extends ImportExport {
-    public Export(PhonebookStorage pb, String filename) {
-        super(pb, filename);
+    public Export(PhonebookStorage pb, String filename,View view) {
+        super(pb, filename,view);
     }
 
     public boolean savePhonebook(FileType fileType) {
@@ -43,7 +43,7 @@ public class Export extends ImportExport {
             outputStream.write(content.toString().getBytes());
             return true;
         } catch (IOException e) {
-            System.out.println("Ошибка при записи данных\n" + Arrays.toString(e.getStackTrace()));
+            view.println("Ошибка при записи данных\n" + Arrays.toString(e.getStackTrace()));
 //            e.printStackTrace();
             return false;
         }
@@ -53,9 +53,10 @@ public class Export extends ImportExport {
         String fileName = filename + ".html";
         if (validateFilename(fileName)) return false;
         String templateHeader = """
-                <HTML>
+                <HTML lang="ru-RU">
                 <HEAD>
                 <TITLE>Телефонный справочник</TITLE>
+                <meta charSet="utf-8"/>
                 </HEAD>
                 <body>
                 <p>Телефонный справочник.</p>
@@ -79,7 +80,7 @@ public class Export extends ImportExport {
             outputStream.write(contentHTML.toString().getBytes());
             return true;
         } catch (IOException e) {
-            System.out.println("Ошибка при записи данных\n" + Arrays.toString(e.getStackTrace()));
+            view.println("Ошибка при записи данных\n" + Arrays.toString(e.getStackTrace()));
 //            e.printStackTrace();
             return false;
         }
@@ -96,12 +97,10 @@ public class Export extends ImportExport {
             //закрываем поток и освобождаем ресурсы
             objectOutputStream.close();
         } catch (IOException e) {
-            System.out.println("Ошибка при записи данных\n" + Arrays.toString(e.getStackTrace()));
+            view.println("Ошибка при записи данных\n" + Arrays.toString(e.getStackTrace()));
 //            e.printStackTrace();
             return false;
         }
         return true;
     }
-
-
 }

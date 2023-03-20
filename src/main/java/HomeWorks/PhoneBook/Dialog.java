@@ -3,14 +3,19 @@ package HomeWorks.PhoneBook;
 import java.util.Scanner;
 
 public class Dialog {
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
+    private final View vw;
 
-    public static String getText() {
+    public Dialog(View vw) {
+        this.vw = vw;
+    }
+
+    public String getText() {
         return scanner.nextLine();
     }
 
-    public static String getText(String s) {
-        System.out.print(s);
+    public String getText(String s) {
+        vw.print(s);
         return getText();
     }
 }
