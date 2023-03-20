@@ -21,12 +21,12 @@ public class ConsoleView implements View{
      * Вывод нумерованного списка с предварительным текстом (описанием)
      *
      * @param records    - List<R> список записей
-     * @param descripton - предварительный текст
+     * @param description - предварительный текст
      * @param <R>
      */
     @Override
-    public <R> void printAllwithDescription(List<R> records, String descripton) {
-        if (!descripton.isBlank() || !descripton.isEmpty()) System.out.println(descripton);
+    public <R> void printAllwithDescription(List<R> records, String description) {
+        if (!description.isBlank() || !description.isEmpty()) System.out.println(description);
         printAll(records);
     }
 

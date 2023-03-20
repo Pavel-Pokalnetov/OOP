@@ -18,4 +18,6 @@ public class Dialog {
         vw.print(s);
         return getText();
     }
+
+
 }
