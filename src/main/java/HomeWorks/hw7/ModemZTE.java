@@ -7,8 +7,11 @@ import java.net.Socket;
  * может выходить в интернет, отправлять смс, но не может звонить
  */
 public class ModemZTE extends BaseModem implements SMSSender<SMSContentText> {
-    public ModemZTE() {
-        this.model = "ZTE";
+
+
+    public ModemZTE(String model) {
+        this.model = model;
+        this.type = InterfaceType.usb;
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.net.Socket;
  */
 public abstract class BaseModem implements Internet {
     String model;
+    InterfaceType type;
     @Override
     public void connect() {
 
